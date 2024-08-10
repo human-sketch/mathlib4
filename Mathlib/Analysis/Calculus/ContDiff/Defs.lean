@@ -1489,7 +1489,7 @@ theorem iteratedFDerivWithin_of_isOpen (n : ℕ) (hs : IsOpen s) :
   induction' n with n IH
   · intro x _
     ext1
-    simp only [Nat.zero_eq, iteratedFDerivWithin_zero_apply, iteratedFDeriv_zero_apply]
+    simp only [iteratedFDerivWithin_zero_apply, iteratedFDeriv_zero_apply]
   · intro x hx
     rw [iteratedFDeriv_succ_eq_comp_left, iteratedFDerivWithin_succ_eq_comp_left]
     dsimp

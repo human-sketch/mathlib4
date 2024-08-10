@@ -356,7 +356,7 @@ def AddCommMonoid.uniqueNatModule : Unique (Module ℕ M) where
 
 instance AddCommMonoid.nat_isScalarTower : IsScalarTower ℕ R M where
   smul_assoc n x y :=
-    Nat.recOn n (by simp only [Nat.zero_eq, zero_smul])
+    Nat.recOn n (by simp only [zero_smul])
     fun n ih => by simp only [Nat.succ_eq_add_one, add_smul, one_smul, ih]
 
 end AddCommMonoid

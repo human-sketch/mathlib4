@@ -104,7 +104,7 @@ theorem SuperpolynomialDecay.mul_param (hf : SuperpolynomialDecay l k f) :
 theorem SuperpolynomialDecay.param_pow_mul (hf : SuperpolynomialDecay l k f) (n : ℕ) :
     SuperpolynomialDecay l k (k ^ n * f) := by
   induction' n with n hn
-  · simpa only [Nat.zero_eq, one_mul, pow_zero] using hf
+  · simpa only [one_mul, pow_zero] using hf
   · simpa only [pow_succ', mul_assoc] using hn.param_mul
 
 theorem SuperpolynomialDecay.mul_param_pow (hf : SuperpolynomialDecay l k f) (n : ℕ) :
