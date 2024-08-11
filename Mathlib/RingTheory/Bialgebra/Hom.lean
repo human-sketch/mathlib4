@@ -67,6 +67,7 @@ instance (priority := 100) toAlgHomClass : AlgHomClass F R A B where
   map_add := map_add
   map_zero := map_zero
   commutes := fun c r => by
+    -- TensorProduct.map_one
     simp only [Algebra.algebraMap_eq_smul_one, map_smul, _root_.map_one]
 
 /-- Turn an element of a type `F` satisfying `BialgHomClass F R A B` into an actual

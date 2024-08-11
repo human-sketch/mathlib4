@@ -199,12 +199,15 @@ private lemma span_range_relation_eq_ker_baseChange :
         simp only [Generators.algebraMap_apply, algHom_C, TensorProduct.algebraMap_apply,
           id.map_eq_id, RingHom.id_apply, e]
         erw [← MvPolynomial.algebraMap_eq, AlgEquiv.commutes]
+        -- TensorProduct.map_one
         simp only [TensorProduct.algebraMap_apply, id.map_eq_id, RingHom.id_apply,
           TensorProduct.map_tmul, AlgHom.coe_id, id_eq, _root_.map_one, algebraMap_eq]
         erw [aeval_C]
         simp
       | h_add p q hp hq => simp only [map_add, hp, hq]
       | h_X p i hp =>
+        -- TensorProduct.map_mul
+        -- TensorProduct.map_one
         simp only [_root_.map_mul, algebraTensorAlgEquiv_symm_X, hp, TensorProduct.map_tmul,
           _root_.map_one, IsScalarTower.coe_toAlgHom', Generators.algebraMap_apply, aeval_X, e]
         congr
@@ -215,6 +218,7 @@ private lemma span_range_relation_eq_ker_baseChange :
     erw [← P.span_range_relation_eq_ker, ← Ideal.mem_comap, Ideal.comap_symm,
       Ideal.map_map, Ideal.map_span, ← Set.range_comp] at H'
     convert H'
+    -- TensorProduct.map_one
     simp only [AlgHom.toRingHom_eq_coe, RingHom.coe_comp, RingHom.coe_coe, Function.comp_apply,
       TensorProduct.includeRight_apply, TensorProduct.lift_tmul, _root_.map_one, mapAlgHom_apply,
       one_mul]

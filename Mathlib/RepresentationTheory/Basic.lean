@@ -371,7 +371,9 @@ tensor product `V ⊗[k] W`.
 -/
 noncomputable def tprod : Representation k G (V ⊗[k] W) where
   toFun g := TensorProduct.map (ρV g) (ρW g)
+  -- TensorProduct.map_one
   map_one' := by simp only [_root_.map_one, TensorProduct.map_one]
+  -- TensorProduct.map_mul
   map_mul' g h := by simp only [_root_.map_mul, TensorProduct.map_mul]
 
 local notation ρV " ⊗ " ρW => tprod ρV ρW
