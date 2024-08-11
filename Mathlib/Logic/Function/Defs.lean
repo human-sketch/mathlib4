@@ -32,11 +32,11 @@ Because of changes in how equation lemmas are generated,
 Thus this usage is no longer allowed: -/
 -- attribute [eqns flip_def] flip
 
-/-- Composition of dependent functions: `(f ∘' g) x = f (g x)`, where type of `g x` depends on `x`
-and type of `f (g x)` depends on `x` and `g x`. -/
-@[inline, reducible]
-def dcomp {β : α → Sort u₂} {φ : ∀ {x : α}, β x → Sort u₃} (f : ∀ {x : α} (y : β x), φ y)
-    (g : ∀ x, β x) : ∀ x, φ (g x) := fun x => f (g x)
+/-- Composition of dependent functions: `(f ∘' g) x = f (g x)`,
+where types of `g x` and `f (g x)` depend on `x`. -/
+@[inline]
+def dcomp {β φ : α → Sort u₂} (f : ∀ {x : α}, β x → φ x)
+    (g : ∀ x, β x) : ∀ x, φ x := fun x => f (g x)
 
 infixr:80 " ∘' " => Function.dcomp
 
