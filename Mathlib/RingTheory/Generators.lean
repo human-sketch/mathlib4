@@ -145,7 +145,6 @@ def localizationAway : Generators R S where
     letI n : ℕ := (IsLocalization.Away.sec r s).2
     C a * X () ^ n
   aeval_val_σ' s := by
-    -- TensorProduct.map_mul
     rw [_root_.map_mul, algHom_C, map_pow, aeval_X]
     simp only [← IsLocalization.Away.sec_spec, map_pow, IsLocalization.Away.invSelf]
     rw [← IsLocalization.mk'_pow, one_pow, ← IsLocalization.mk'_one (M := Submonoid.powers r) S r]
@@ -169,8 +168,6 @@ def comp (Q : Generators S T) (P : Generators R S) : Generators R T where
     have (x : P.Ring) : aeval (algebraMap S T ∘ P.val) x = algebraMap S T (aeval P.val x) := by
       rw [map_aeval, aeval_def, coe_eval₂Hom, ← IsScalarTower.algebraMap_eq, Function.comp]
     conv_rhs => rw [← Q.aeval_val_σ s, ← (Q.σ s).sum_single]
-    -- TensorProduct.map_mul
-    -- TensorProduct.map_one
     simp only [map_finsupp_sum, _root_.map_mul, aeval_rename, Sum.elim_comp_inr, this, aeval_val_σ,
       aeval_monomial, _root_.map_one, Finsupp.prod_mapDomain_index_inj Sum.inl_injective,
       Sum.elim_inl, one_mul, single_eq_monomial]
@@ -313,7 +310,6 @@ noncomputable def Hom.comp [IsScalarTower R' R'' S''] [IsScalarTower R' S' S'']
     induction g.val x using MvPolynomial.induction_on with
     | h_C r => simp [← IsScalarTower.algebraMap_apply]
     | h_add x y hx hy => simp only [map_add, hx, hy]
-    -- TensorProduct.map_mul
     | h_X p i hp => simp only [_root_.map_mul, hp, aeval_X, aeval_val]
 
 @[simp]
@@ -338,7 +334,6 @@ lemma Hom.toAlgHom_comp_apply
   induction x using MvPolynomial.induction_on with
   | h_C r => simp only [← MvPolynomial.algebraMap_eq, AlgHom.map_algebraMap]
   | h_add x y hx hy => simp only [map_add, hx, hy]
-  -- TensorProduct.map_mul
   | h_X p i hp => simp only [_root_.map_mul, hp, toAlgHom_X, comp_val]; rfl
 
 variable {T} [CommRing T] [Algebra R T] [Algebra S T] [IsScalarTower R S T]
@@ -443,7 +438,6 @@ instance {R₁ R₂} [CommRing R₁] [CommRing R₂] [Algebra R₁ S] [Algebra R
   constructor
   intros r s m
   show algebraMap R₂ S (r • s) • m = (algebraMap _ S r) • (algebraMap _ S s) • m
-  -- TensorProduct.map_mul
   rw [Algebra.smul_def, _root_.map_mul, mul_smul, ← IsScalarTower.algebraMap_apply]
 
 lemma Cotangent.val_smul''' {R₀} [CommRing R₀] [Algebra R₀ S] (r : R₀) (x : P.Cotangent) :
@@ -494,7 +488,6 @@ def Cotangent.map (f : Hom P P') : P.Cotangent →ₗ[S] P'.Cotangent where
       ← algebraMap_apply, algebraMap_smul, val_smul', val_of, ← (Ideal.toCotangent _).map_smul]
     congr 1
     ext1
-    -- TensorProduct.map_mul
     simp only [SetLike.val_smul, smul_eq_mul, _root_.map_mul]
 
 @[simp]

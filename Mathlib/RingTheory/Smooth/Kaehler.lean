@@ -51,11 +51,9 @@ def derivationOfSectionOfKerSqZero (f : P →ₐ[R] S) (hf' : (RingHom.ker f) ^ 
   map_add' x y := by simp only [map_add, AddSubmonoid.mk_add_mk, Subtype.mk.injEq]; ring
   map_smul' x y := by
     ext
-    -- TensorProduct.map_mul
     simp only [Algebra.smul_def, _root_.map_mul, ← IsScalarTower.algebraMap_apply,
       AlgHom.commutes, RingHom.id_apply, Submodule.coe_smul_of_tower]
     ring
-  -- TensorProduct.map_one
   map_one_eq_zero' := by simp only [LinearMap.coe_mk, AddHom.coe_mk, _root_.map_one, sub_self,
     AddSubmonoid.mk_eq_zero]
   leibniz' a b := by
@@ -67,7 +65,6 @@ def derivationOfSectionOfKerSqZero (f : P →ₐ[R] S) (hf' : (RingHom.ker f) ^ 
     ext
     rw [← sub_eq_zero]
     conv_rhs => rw [← neg_zero, ← this]
-    -- TensorProduct.map_mul
     simp only [LinearMap.coe_mk, AddHom.coe_mk, _root_.map_mul, SetLike.mk_smul_mk, smul_eq_mul,
       mul_sub, AddSubmonoid.mk_add_mk, sub_mul, neg_sub]
     ring
@@ -79,7 +76,6 @@ lemma isScalarTower_of_section_of_ker_sqZero :
   intro p s m
   ext
   show g (p • s) * m = p * (g s * m)
-  -- TensorProduct.map_mul
   simp only [Algebra.smul_def, _root_.map_mul, mul_assoc, mul_left_comm _ (g s)]
   congr 1
   rw [← sub_eq_zero, ← Ideal.mem_bot, ← hf', pow_two, ← sub_mul]
