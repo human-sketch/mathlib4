@@ -218,12 +218,11 @@ variable [Nontrivial S] [IsDedekindDomain S] [Module.Free ℤ S]
 
 theorem absNorm_apply (I : Ideal S) : absNorm I = cardQuot I := rfl
 
--- Submodule.map_zero
 @[simp]
 theorem absNorm_bot : absNorm (⊥ : Ideal S) = 0 := by rw [← Ideal.zero_eq_bot, _root_.map_zero]
 
 @[simp]
-theorem absNorm_top : absNorm (⊤ : Ideal S) = 1 := by rw [← Ideal.one_eq_top, map_one]
+theorem absNorm_top : absNorm (⊤ : Ideal S) = 1 := by rw [← Ideal.one_eq_top, _root_.map_one]
 
 @[simp]
 theorem absNorm_eq_one_iff {I : Ideal S} : absNorm I = 1 ↔ I = ⊤ := by
@@ -243,7 +242,6 @@ theorem irreducible_of_irreducible_absNorm {I : Ideal S} (hI : Irreducible (Idea
       hI.not_unit (by simpa only [Ideal.isUnit_iff, Nat.isUnit_iff, absNorm_eq_one_iff] using h),
       by
       rintro a b rfl
-      -- Ideal.map_mul
       simpa only [Ideal.isUnit_iff, Nat.isUnit_iff, absNorm_eq_one_iff] using
         hI.isUnit_or_isUnit (_root_.map_mul absNorm a b)⟩
 
@@ -358,7 +356,6 @@ theorem absNorm_span_singleton (r : S) :
     absNorm (span ({r} : Set S)) = (Algebra.norm ℤ r).natAbs := by
   rw [Algebra.norm_apply]
   by_cases hr : r = 0
-  -- Submodule.map_zero
   · simp only [hr, Ideal.span_zero, Algebra.coe_lmul_eq_mul, eq_self_iff_true, Ideal.absNorm_bot,
       LinearMap.det_zero'', Set.singleton_zero, _root_.map_zero, Int.natAbs_zero]
   letI := Ideal.fintypeQuotientOfFreeOfNeBot (span {r}) (mt span_singleton_eq_bot.mp hr)
@@ -508,7 +505,6 @@ theorem spanNorm_localization (I : Ideal S) [Module.Finite R S] [Module.Free R S
       ⟨s ^ Fintype.card (Module.Free.ChooseBasisIndex R S), pow_mem hs _⟩, ?_⟩
     simp only [Submodule.coe_mk, Subtype.coe_mk, map_pow] at has ⊢
     apply_fun Algebra.norm Rₘ at has
-    -- Ideal.map_mul
     rwa [_root_.map_mul, ← IsScalarTower.algebraMap_apply, IsScalarTower.algebraMap_apply R Rₘ,
       Algebra.norm_algebraMap_of_basis (b.localizationLocalization Rₘ M Sₘ),
       Algebra.norm_localization R M a] at has
@@ -574,7 +570,6 @@ theorem spanNorm_mul (I J : Ideal S) : spanNorm R (I * J) = spanNorm R I * spanN
   letI := Classical.decEq (Ideal (Localization P'))
   haveI : IsPrincipalIdealRing (Localization P') :=
     IsDedekindDomain.isPrincipalIdealRing_localization_over_prime S P hP0
-  -- Ideal.map_mul
   rw [Ideal.map_mul, ← spanNorm_localization R I P.primeCompl (Localization P'),
     ← spanNorm_localization R J P.primeCompl (Localization P'),
     ← spanNorm_localization R (I * J) P.primeCompl (Localization P'), Ideal.map_mul,
@@ -598,7 +593,7 @@ theorem spanNorm_eq (I : Ideal S) : spanNorm R I = relNorm R I := rfl
 
 @[simp]
 theorem relNorm_bot : relNorm R (⊥ : Ideal S) = ⊥ := by
-  simpa only [zero_eq_bot] using map_zero (relNorm R : Ideal S →*₀ _)
+  simpa only [zero_eq_bot] using _root_.map_zero (relNorm R : Ideal S →*₀ _)
 
 @[simp]
 theorem relNorm_top : relNorm R (⊤ : Ideal S) = ⊤ := by

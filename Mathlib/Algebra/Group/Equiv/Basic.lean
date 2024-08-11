@@ -213,7 +213,7 @@ theorem coe_toMulHom {f : M ≃* N} : (f.toMulHom : M → N) = f := rfl
 /-- A multiplicative isomorphism preserves multiplication. -/
 @[to_additive "An additive isomorphism preserves addition."]
 protected theorem map_mul (f : M ≃* N) : ∀ x y, f (x * y) = f x * f y :=
-  map_mul f
+  _root_.map_mul f
 
 attribute [deprecated map_mul (since := "2024-08-08")] MulEquiv.map_mul
 attribute [deprecated map_add (since := "2024-08-08")] AddEquiv.map_add
@@ -578,13 +578,13 @@ def piUnique {ι : Type*} (M : ι → Type*) [∀ j, Mul (M j)] [Unique ι] :
 @[to_additive "An additive equivalence of additive groups preserves negation."]
 protected theorem map_inv [Group G] [DivisionMonoid H] (h : G ≃* H) (x : G) :
     h x⁻¹ = (h x)⁻¹ :=
-  map_inv h x
+  _root_.map_inv h x
 
 /-- A multiplicative equivalence of groups preserves division. -/
 @[to_additive "An additive equivalence of additive groups preserves subtractions."]
 protected theorem map_div [Group G] [DivisionMonoid H] (h : G ≃* H) (x y : G) :
     h (x / y) = h x / h y :=
-  map_div h x y
+  _root_.map_div h x y
 
 end MulEquiv
 
