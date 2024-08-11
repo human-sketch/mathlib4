@@ -111,7 +111,7 @@ lemma map_tmul (f : Hom P P') (x y) :
 lemma repr_map (f : Hom P P') (i j) :
     P'.cotangentSpaceBasis.repr (CotangentSpace.map f (P.cotangentSpaceBasis i)) j =
       aeval P'.val (pderiv j (f.val i)) := by
-  simp only [cotangentSpaceBasis_apply, map_tmul, _root_.map_one, Hom.toAlgHom_X,
+  simp only [cotangentSpaceBasis_apply, map_tmul, map_one, Hom.toAlgHom_X,
     cotangentSpaceBasis_repr_one_tmul]
 
 universe w'' u'' v''

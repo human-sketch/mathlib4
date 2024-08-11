@@ -428,7 +428,7 @@ theorem le_div_iff_mul_le {I J J' : FractionalIdeal R₁⁰ K} (hJ' : J' ≠ 0) 
   exact Submodule.le_div_iff_mul_le
 
 @[simp]
-theorem div_one {I : FractionalIdeal R₁⁰ K} : I / 1 = I := by
+protected theorem div_one {I : FractionalIdeal R₁⁰ K} : I / 1 = I := by
   rw [div_nonzero (one_ne_zero' (FractionalIdeal R₁⁰ K))]
   ext
   constructor <;> intro h
