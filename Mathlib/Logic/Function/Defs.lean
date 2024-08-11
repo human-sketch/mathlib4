@@ -35,8 +35,7 @@ Thus this usage is no longer allowed: -/
 /-- Composition of dependent functions: `(f ∘' g) x = f (g x)`,
 where types of `g x` and `f (g x)` depend on `x`. -/
 @[inline]
-def dcomp {β φ : α → Sort u₂} (f : ∀ {x : α}, β x → φ x)
-    (g : ∀ x, β x) : ∀ x, φ x := fun x => f (g x)
+def dcomp {β φ : α → Sort*} (f : ∀ x : α, β x → φ x) (g : ∀ x, β x) : ∀ x, φ x := fun x ↦ f x (g x)
 
 infixr:80 " ∘' " => Function.dcomp
 

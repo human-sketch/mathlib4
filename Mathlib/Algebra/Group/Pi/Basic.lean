@@ -401,7 +401,7 @@ theorem extend_div [Div γ] (f : α → β) (g₁ g₂ : α → γ) (e₁ e₂ :
 end Extend
 
 theorem surjective_pi_map {F : ∀ i, f i → g i} (hF : ∀ i, Surjective (F i)) :
-    Surjective fun x : ∀ i, f i => fun i => F i (x i) := fun y =>
+    Surjective (F ∘' ·) := fun y =>
   ⟨fun i => (hF i (y i)).choose, funext fun i => (hF i (y i)).choose_spec⟩
 
 theorem injective_pi_map {F : ∀ i, f i → g i} (hF : ∀ i, Injective (F i)) :
