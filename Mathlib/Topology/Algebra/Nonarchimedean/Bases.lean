@@ -237,10 +237,10 @@ structure SubmodulesBasis [TopologicalSpace R] (B : ι → Submodule R M) : Prop
 
 namespace SubmodulesBasis
 
-variable [TopologicalSpace R] [Nonempty ι] {B : ι → Submodule R M} (hB : SubmodulesBasis B)
+variable [TopologicalSpace R] [Nonempty ι] {B : ι → Submodule R M}
 
 /-- The image of a submodules basis is a module filter basis. -/
-def toModuleFilterBasis : ModuleFilterBasis R M where
+def toModuleFilterBasis (hB : SubmodulesBasis B) : ModuleFilterBasis R M where
   sets := { U | ∃ i, U = B i }
   nonempty := by
     inhabit ι
@@ -297,12 +297,12 @@ def toModuleFilterBasis : ModuleFilterBasis R M where
     exact hB.smul m₀ i
 
 /-- The topology associated to a basis of submodules in a module. -/
-def topology : TopologicalSpace M :=
+def topology (hB : SubmodulesBasis B) : TopologicalSpace M :=
   hB.toModuleFilterBasis.toAddGroupFilterBasis.topology
 
 /-- Given a submodules basis, the basis elements as open additive subgroups in the associated
 topology. -/
-def openAddSubgroup (i : ι) : @OpenAddSubgroup M _ hB.topology :=
+def openAddSubgroup (hB : SubmodulesBasis B) (i : ι) : @OpenAddSubgroup M _ hB.topology :=
   let _ := hB.topology -- Porting note: failed to synthesize instance `TopologicalSpace A`
   { (B i).toAddSubgroup with
     isOpen' := by
@@ -381,4 +381,5 @@ This allows to build a topological module structure compatible with the given mo
 and the topology associated to the given ring filter basis. -/
 def RingFilterBasis.moduleFilterBasis [Nonempty ι] (BR : RingFilterBasis R) {B : ι → Submodule R M}
     (hB : BR.SubmodulesBasis B) : @ModuleFilterBasis R M _ BR.topology _ _ :=
-  @SubmodulesBasis.toModuleFilterBasis ι R _ M _ _ BR.topology _ _ (BR.submodulesBasisIsBasis hB)
+  let _ := BR.topology
+  SubmodulesBasis.toModuleFilterBasis (BR.submodulesBasisIsBasis hB)
